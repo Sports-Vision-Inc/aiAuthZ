@@ -1,0 +1,48 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: aiauthz
+      POSTGRES_PASSWORD: aiauthz
+      POSTGRES_DB: aiauthz
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U aiauthz"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  aiauthz:
+    build: .
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      AIAUTHZ_MODE: self_hosted
+      AIAUTHZ_DATABASE_URL: postgresql+psycopg://aiauthz:aiauthz@postgres:5432/aiauthz
+      AIAUTHZ_REDIS_URL: redis://redis:6379/0
+      AIAUTHZ_MASTER_KEY: ${AIAUTHZ_MASTER_KEY:?set AIAUTHZ_MASTER_KEY in your shell}
+      AIAUTHZ_WATERMARK_DIR: /app/storage/watermarks
+      AIAUTHZ_TOOLS_CONFIG: /app/config/tools.yaml
+      AIAUTHZ_HOST: 0.0.0.0
+      AIAUTHZ_PORT: "8080"
+    volumes:
+      - watermarks:/app/storage/watermarks
+      - ./config/tools.example.yaml:/app/config/tools.yaml:ro
+    ports:
+      - "8080:8080"
+
+volumes:
+  pgdata:
+  watermarks:

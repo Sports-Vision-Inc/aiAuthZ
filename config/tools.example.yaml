@@ -1,0 +1,40 @@
+# aiAuthZ tool configuration.
+#
+# aiAuthZ is an authorization gateway. It does not execute tools; it
+# decides whether a tool call is permitted, scopes the inputs, and records
+# the decision for audit. Each tool maps to one of three executors below.
+#
+#   decision  Default. Return the policy decision (allow/deny) and pass the
+#             scoped arguments back to the caller. The agent performs the
+#             actual side effect on its own infrastructure.
+#
+#   forward   Proxy the call to a customer-supplied URL. Use when the
+#             deployment wants the gateway in the data path so it can
+#             apply response-side redaction or post-hoc audit before
+#             returning to the agent.
+#
+#   mock      Deterministic no-op used by the test suite.
+#
+#   python:pkg.mod:callable
+#             Customer-built executor. Loaded by import path; receives
+#             the args dict, returns dict or ToolResult. Use this to wrap
+#             internal SDKs without modifying the gateway.
+
+file_read:   { executor: decision }
+file_write:  { executor: decision }
+file_delete: { executor: decision }
+shell:       { executor: decision }
+send_email:  { executor: decision }
+env_read:    { executor: decision }
+
+web_fetch:
+  executor: forward
+  url: https://tools.example.internal/web_fetch
+  timeout_seconds: 10
+  headers:
+    Authorization: Bearer ${TOOL_BACKEND_TOKEN}
+
+web_search:
+  executor: forward
+  url: https://tools.example.internal/web_search
+  timeout_seconds: 10

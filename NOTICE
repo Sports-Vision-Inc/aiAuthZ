@@ -1,0 +1,43 @@
+aiAuthZ
+Copyright (c) 2026 SportsVision AI
+
+This product includes software developed by SportsVision AI
+(https://www.sportsvision.ai).
+
+Licensed under the GNU Affero General Public License v3.0 (the "License");
+you may not use this software except in compliance with the License. A copy
+of the License is included in the file LICENSE at the root of this
+repository, and is also available at:
+
+    https://www.gnu.org/licenses/agpl-3.0.txt
+
+Commercial licenses that remove the AGPL obligations are available for
+enterprises — see COMMERCIAL-LICENSE.md.
+
+Trademarks. "aiAuthZ", "SportsVision AI", and the SportsVision AI logo
+are trademarks of SportsVision AI. The AGPL grants copyright and patent
+licenses; it does not grant a trademark license. Forks must not use the
+"aiAuthZ" or "SportsVision AI" names in a way that implies endorsement.
+
+Endorsement and citation. If you deploy or substantially extend this
+software in a commercial product, research paper, or public project,
+please credit SportsVision AI with a link back to https://www.sportsvision.ai
+or to https://aiauthz.us. For research use, cite the watermarking work:
+
+    Kodathala Sai Varun, A. K. Mandava, R. Chowdary,
+    "Robust DWT-SVD Domain Image Watermarking based on Iterative
+    Blending," J. Phys.: Conf. Ser. 2070 012111 (2021).
+
+Reverse engineering. The source code is provided for use under the
+AGPL-3.0 license. The watermarking, key-derivation, and audit
+verification mechanisms are part of SportsVision AI's intellectual
+research output. Reverse engineering that goes beyond the License's
+permitted uses, including any attempt to remove identifying marks
+from generated artifacts or to forge artifacts under another user's
+identity, is not authorized.
+
+Contact. Security disclosure, licensing, and general inquiries:
+support@sportsvision.ai.
+
+Privacy. This software does not call home; the open-source distribution
+transmits no telemetry.

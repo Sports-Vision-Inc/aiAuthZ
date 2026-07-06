@@ -1,0 +1,61 @@
+# Egress-locked reference deployment (Tier-2 bypass mitigation).
+#
+# The gateway only governs tool calls routed through it. A misconfigured agent
+# runtime with its own shell/file/web tools can bypass it (see `aiauthz doctor`
+# and docs/INTEGRATIONS.md). This compose closes that hole structurally: the
+# agent container has NO route to the outside world except the gateway, so even
+# a rogue built-in `web`/`http` tool cannot reach an attacker endpoint, and no
+# host filesystem is mounted into it.
+#
+#   - `agent` sits only on the internal `locked` network (internal: true).
+#   - Only `gateway` bridges `locked` and the external network.
+#   => the agent can reach the gateway and nothing else. Complete mediation.
+#
+# Usage: docker compose -f deploy/sandbox/docker-compose.yml up --build
+
+services:
+  gateway:
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+    environment:
+      AIAUTHZ_DATABASE_URL: postgresql+psycopg://aiauthz:aiauthz@db:5432/aiauthz
+      AIAUTHZ_REDIS_URL: redis://redis:6379/0
+      AIAUTHZ_MASTER_KEY: ${AIAUTHZ_MASTER_KEY:?set AIAUTHZ_MASTER_KEY}
+      AIAUTHZ_HOST: 0.0.0.0
+      AIAUTHZ_PORT: "8080"
+    networks: [locked, external]     # the ONLY container on both networks
+    depends_on: [db, redis]
+
+  # Your agent runtime goes here. It can reach the gateway and nothing else.
+  # Replace `image` / `command` with Hermes, OpenClaw, a custom MCP client, etc.
+  agent:
+    image: ${AGENT_IMAGE:-alpine:3.20}
+    command: ["sh", "-c", "echo 'agent runtime placeholder — only egress is the gateway'; sleep infinity"]
+    environment:
+      AIAUTHZ_MCP_URL: http://gateway:8080/mcp
+    networks: [locked]               # internal-only: no outbound internet
+    # No volumes: the host filesystem is not mounted, so built-in file tools
+    # have nothing sensitive to read.
+    depends_on: [gateway]
+
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: aiauthz
+      POSTGRES_PASSWORD: aiauthz
+      POSTGRES_DB: aiauthz
+    networks: [locked]
+    volumes: [pgdata:/var/lib/postgresql/data]
+
+  redis:
+    image: redis:7
+    networks: [locked]
+
+networks:
+  locked:
+    internal: true      # no route to the host / internet
+  external: {}          # only the gateway is attached here
+
+volumes:
+  pgdata: {}

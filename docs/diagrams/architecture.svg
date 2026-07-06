@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#334155"/>
+    </marker>
+    <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#2563eb"/>
+    </marker>
+    <style>
+      .ttl{font-size:22px;font-weight:700;fill:#0f172a}
+      .sub{font-size:13px;fill:#64748b}
+      .box{font-size:15px;font-weight:600;fill:#0f172a}
+      .lbl{font-size:12.5px;fill:#334155}
+      .tag{font-size:11px;font-weight:700;fill:#475569;letter-spacing:.06em}
+      .mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;fill:#475569}
+    </style>
+  </defs>
+
+  <rect width="960" height="540" fill="#ffffff"/>
+  <text x="40" y="46" class="ttl">aiAuthZ — off-host authorization for AI agents</text>
+  <text x="40" y="68" class="sub">Two questions answered with cryptography on every action: who really sent this, and are they allowed to do it.</text>
+
+  <!-- Trust boundary -->
+  <line x1="336" y1="96" x2="336" y2="486" stroke="#94a3b8" stroke-width="2" stroke-dasharray="7 6"/>
+  <text x="196" y="112" text-anchor="middle" class="tag">AGENT HOST (untrusted)</text>
+  <text x="660" y="112" text-anchor="middle" class="tag">aiAuthZ HOST · separate trust domain</text>
+
+  <!-- User -->
+  <rect x="40" y="150" width="150" height="86" rx="10" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="115" y="188" text-anchor="middle" class="box">User</text>
+  <text x="115" y="210" text-anchor="middle" class="lbl">holds HMAC key</text>
+  <text x="115" y="226" text-anchor="middle" class="mono">per-user secret</text>
+
+  <!-- Agent runtime -->
+  <rect x="40" y="322" width="150" height="96" rx="10" fill="#f1f5f9" stroke="#cbd5e1"/>
+  <text x="115" y="358" text-anchor="middle" class="box">Agent runtime</text>
+  <text x="115" y="380" text-anchor="middle" class="lbl">any model + tools</text>
+  <text x="115" y="398" text-anchor="middle" class="lbl">holds no keys/policy</text>
+
+  <!-- Gateway container -->
+  <rect x="392" y="128" width="360" height="330" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="572" y="156" text-anchor="middle" class="box" fill="#1d4ed8">aiAuthZ gateway</text>
+
+  <!-- Identity -->
+  <rect x="416" y="172" width="312" height="60" rx="9" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="430" y="196" class="box">1 · Identity</text>
+  <text x="430" y="216" class="lbl">verify per-message HMAC · nonce · bind session user</text>
+
+  <!-- Policy -->
+  <rect x="416" y="242" width="312" height="60" rx="9" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="430" y="266" class="box">2 · Policy (allow / deny)</text>
+  <text x="430" y="286" class="lbl">role · path/URL/recipient rules · rate limits</text>
+
+  <!-- Audit -->
+  <rect x="416" y="312" width="150" height="60" rx="9" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="430" y="336" class="box">3 · Audit</text>
+  <text x="430" y="356" class="lbl">hash chain</text>
+
+  <!-- Receipt -->
+  <rect x="578" y="312" width="150" height="60" rx="9" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="592" y="336" class="box">4 · Receipt</text>
+  <text x="592" y="356" class="lbl">signed QR</text>
+
+  <!-- policy store + secrets -->
+  <rect x="416" y="386" width="312" height="52" rx="9" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="430" y="408" class="lbl">policy store · user keys · brokered secrets</text>
+  <text x="430" y="426" class="mono">the agent has no credentials to read or rewrite these</text>
+
+  <!-- Flows -->
+  <!-- user -> gateway ingress -->
+  <path d="M190 178 L410 195" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <text x="300" y="176" text-anchor="middle" class="lbl" fill="#1d4ed8">signed message</text>
+
+  <!-- gateway -> agent verified -->
+  <path d="M410 214 C 300 250, 300 330, 192 352" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#arrow)"/>
+  <text x="286" y="300" text-anchor="middle" class="lbl">verified message</text>
+
+  <!-- agent -> gateway tool call -->
+  <path d="M190 386 L410 292" fill="none" stroke="#334155" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text x="292" y="374" text-anchor="middle" class="lbl">tool call (MCP / HTTP)</text>
+
+  <!-- decision back -->
+  <path d="M410 276 L196 372" fill="none" stroke="#059669" stroke-width="1.4" stroke-dasharray="4 4" marker-end="url(#arrow)"/>
+
+  <text x="40" y="512" class="sub">Because policy and keys live in a different trust domain, a compromised or prompt-injected agent cannot forge an approval or rewrite its own rules.</text>
+</svg>

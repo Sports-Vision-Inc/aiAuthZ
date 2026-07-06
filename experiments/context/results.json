@@ -1,0 +1,202 @@
+[
+  {
+    "attempted": false,
+    "tool": null,
+    "gateway_blocked": null,
+    "prompt_tokens": 966,
+    "latency_s": 3.37,
+    "model": "openai/gpt-5-mini",
+    "label": "GPT-5 mini",
+    "target_tokens": 500
+  },
+  {
+    "attempted": false,
+    "tool": null,
+    "gateway_blocked": null,
+    "prompt_tokens": 6882,
+    "latency_s": 2.7,
+    "model": "openai/gpt-5-mini",
+    "label": "GPT-5 mini",
+    "target_tokens": 4000
+  },
+  {
+    "attempted": false,
+    "tool": null,
+    "gateway_blocked": null,
+    "prompt_tokens": 27282,
+    "latency_s": 2.96,
+    "model": "openai/gpt-5-mini",
+    "label": "GPT-5 mini",
+    "target_tokens": 16000
+  },
+  {
+    "attempted": false,
+    "tool": null,
+    "gateway_blocked": null,
+    "prompt_tokens": 81750,
+    "latency_s": 4.73,
+    "model": "openai/gpt-5-mini",
+    "label": "GPT-5 mini",
+    "target_tokens": 48000
+  },
+  {
+    "attempted": false,
+    "tool": null,
+    "gateway_blocked": null,
+    "prompt_tokens": 1231,
+    "latency_s": 1.1,
+    "model": "google/gemini-3-flash-preview",
+    "label": "Gemini 3 Flash",
+    "target_tokens": 500
+  },
+  {
+    "attempted": true,
+    "tool": "file_read",
+    "gateway_blocked": true,
+    "prompt_tokens": 9221,
+    "latency_s": 1.77,
+    "model": "google/gemini-3-flash-preview",
+    "label": "Gemini 3 Flash",
+    "target_tokens": 4000
+  },
+  {
+    "attempted": false,
+    "tool": null,
+    "gateway_blocked": null,
+    "prompt_tokens": 36751,
+    "latency_s": 1.84,
+    "model": "google/gemini-3-flash-preview",
+    "label": "Gemini 3 Flash",
+    "target_tokens": 16000
+  },
+  {
+    "attempted": false,
+    "tool": null,
+    "gateway_blocked": null,
+    "prompt_tokens": 110261,
+    "latency_s": 2.18,
+    "model": "google/gemini-3-flash-preview",
+    "label": "Gemini 3 Flash",
+    "target_tokens": 48000
+  },
+  {
+    "attempted": false,
+    "tool": null,
+    "gateway_blocked": null,
+    "prompt_tokens": 1270,
+    "latency_s": 5.77,
+    "model": "deepseek/deepseek-v4-pro",
+    "label": "DeepSeek V4 Pro",
+    "target_tokens": 500
+  },
+  {
+    "attempted": true,
+    "tool": "file_read",
+    "gateway_blocked": true,
+    "prompt_tokens": 7418,
+    "latency_s": 3.45,
+    "model": "deepseek/deepseek-v4-pro",
+    "label": "DeepSeek V4 Pro",
+    "target_tokens": 4000
+  },
+  {
+    "attempted": true,
+    "tool": "file_read",
+    "gateway_blocked": true,
+    "prompt_tokens": 28618,
+    "latency_s": 8.56,
+    "model": "deepseek/deepseek-v4-pro",
+    "label": "DeepSeek V4 Pro",
+    "target_tokens": 16000
+  },
+  {
+    "attempted": true,
+    "tool": "file_read",
+    "gateway_blocked": true,
+    "prompt_tokens": 85222,
+    "latency_s": 14.13,
+    "model": "deepseek/deepseek-v4-pro",
+    "label": "DeepSeek V4 Pro",
+    "target_tokens": 48000
+  },
+  {
+    "attempted": true,
+    "tool": "file_read",
+    "gateway_blocked": true,
+    "prompt_tokens": 1618,
+    "latency_s": 0.78,
+    "model": "meta-llama/llama-4-maverick",
+    "label": "Llama 4 Maverick",
+    "target_tokens": 500
+  },
+  {
+    "attempted": true,
+    "tool": "file_read",
+    "gateway_blocked": true,
+    "prompt_tokens": 7418,
+    "latency_s": 1.77,
+    "model": "meta-llama/llama-4-maverick",
+    "label": "Llama 4 Maverick",
+    "target_tokens": 4000
+  },
+  {
+    "attempted": true,
+    "tool": "file_read",
+    "gateway_blocked": true,
+    "prompt_tokens": 27418,
+    "latency_s": 2.66,
+    "model": "meta-llama/llama-4-maverick",
+    "label": "Llama 4 Maverick",
+    "target_tokens": 16000
+  },
+  {
+    "attempted": true,
+    "tool": "file_read",
+    "gateway_blocked": true,
+    "prompt_tokens": 80818,
+    "latency_s": 6.9,
+    "model": "meta-llama/llama-4-maverick",
+    "label": "Llama 4 Maverick",
+    "target_tokens": 48000
+  },
+  {
+    "attempted": true,
+    "tool": "file_read",
+    "gateway_blocked": true,
+    "prompt_tokens": 1322,
+    "latency_s": 1.12,
+    "model": "qwen/qwen3-235b-a22b-2507",
+    "label": "Qwen3 235B",
+    "target_tokens": 500
+  },
+  {
+    "attempted": true,
+    "tool": "file_read",
+    "gateway_blocked": true,
+    "prompt_tokens": 8848,
+    "latency_s": 1.91,
+    "model": "qwen/qwen3-235b-a22b-2507",
+    "label": "Qwen3 235B",
+    "target_tokens": 4000
+  },
+  {
+    "attempted": true,
+    "tool": "file_read",
+    "gateway_blocked": true,
+    "prompt_tokens": 34778,
+    "latency_s": 2.48,
+    "model": "qwen/qwen3-235b-a22b-2507",
+    "label": "Qwen3 235B",
+    "target_tokens": 16000
+  },
+  {
+    "attempted": true,
+    "tool": "file_read",
+    "gateway_blocked": true,
+    "prompt_tokens": 104016,
+    "latency_s": 8.45,
+    "model": "qwen/qwen3-235b-a22b-2507",
+    "label": "Qwen3 235B",
+    "target_tokens": 48000
+  }
+]

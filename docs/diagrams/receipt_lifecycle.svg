@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#334155"/>
+    </marker>
+    <style>
+      .ttl{font-size:19px;font-weight:700;fill:#0f172a}
+      .box{font-size:13.5px;font-weight:600;fill:#0f172a}
+      .lbl{font-size:11.5px;fill:#475569}
+      .ok{font-size:13px;font-weight:700;fill:#059669}
+      .bad{font-size:13px;font-weight:700;fill:#dc2626}
+    </style>
+  </defs>
+  <rect width="960" height="300" fill="#ffffff"/>
+  <text x="30" y="40" class="ttl">Signed audit receipt — survives being forwarded, verifies exactly</text>
+
+  <!-- 1 authorize -->
+  <rect x="30" y="90" width="150" height="72" rx="9" fill="#eff6ff" stroke="#2563eb"/>
+  <text x="105" y="120" text-anchor="middle" class="box">Gateway</text>
+  <text x="105" y="138" text-anchor="middle" class="lbl">authorizes action</text>
+
+  <!-- 2 issue QR -->
+  <rect x="230" y="90" width="160" height="72" rx="9" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="310" y="116" text-anchor="middle" class="box">Issue signed QR</text>
+  <text x="310" y="134" text-anchor="middle" class="lbl">ids + content hash</text>
+  <text x="310" y="150" text-anchor="middle" class="lbl">+ HMAC tag</text>
+
+  <!-- 3 channel -->
+  <rect x="440" y="90" width="170" height="72" rx="9" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="525" y="116" text-anchor="middle" class="box">Forwarded &amp; degraded</text>
+  <text x="525" y="134" text-anchor="middle" class="lbl">Slack · screenshot ·</text>
+  <text x="525" y="150" text-anchor="middle" class="lbl">re-compression · crop</text>
+
+  <!-- 4 verify -->
+  <rect x="660" y="90" width="130" height="72" rx="9" fill="#ffffff" stroke="#cbd5e1"/>
+  <text x="725" y="120" text-anchor="middle" class="box">Verify</text>
+  <text x="725" y="138" text-anchor="middle" class="lbl">decode + compare tag</text>
+
+  <!-- outcomes -->
+  <rect x="830" y="72" width="104" height="46" rx="8" fill="#ecfdf5" stroke="#059669"/>
+  <text x="882" y="100" text-anchor="middle" class="ok">VALID</text>
+  <rect x="830" y="134" width="104" height="46" rx="8" fill="#fef2f2" stroke="#dc2626"/>
+  <text x="882" y="162" text-anchor="middle" class="bad">FORGERY</text>
+
+  <!-- arrows -->
+  <path d="M180 126 L228 126" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#ar)"/>
+  <path d="M390 126 L438 126" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#ar)"/>
+  <path d="M610 126 L658 126" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#ar)"/>
+  <path d="M790 118 L828 100" fill="none" stroke="#059669" stroke-width="1.6" marker-end="url(#ar)"/>
+  <path d="M790 138 L828 156" fill="none" stroke="#dc2626" stroke-width="1.4" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+
+  <text x="30" y="215" class="lbl">A QR code is self-locating and error-correcting, so it re-verifies after the handling that destroys a plain byte-signature or an</text>
+  <text x="30" y="233" class="lbl">invisible watermark. Measured: 94% survival across channels, 97% under screenshot/crop, 0 wrong-key forgeries (experiments/provenance).</text>
+</svg>

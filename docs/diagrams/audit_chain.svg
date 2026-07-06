@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" font-family="Inter, Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="ac" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#334155"/>
+    </marker>
+    <style>
+      .ttl{font-size:19px;font-weight:700;fill:#0f172a}
+      .box{font-size:13px;font-weight:700;fill:#0f172a}
+      .lbl{font-size:11px;fill:#475569}
+      .mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:10.5px;fill:#475569}
+      .bad{font-size:12px;font-weight:700;fill:#dc2626}
+    </style>
+  </defs>
+  <rect width="960" height="300" fill="#ffffff"/>
+  <text x="30" y="40" class="ttl">Tamper-evident audit chain — any edit breaks every later link</text>
+
+  <!-- records -->
+  <g>
+    <!-- r1 -->
+    <rect x="30" y="86" width="150" height="86" rx="9" fill="#eff6ff" stroke="#2563eb"/>
+    <text x="42" y="108" class="box">Record 1</text>
+    <text x="42" y="128" class="lbl">action · decision</text>
+    <text x="42" y="150" class="mono">row_hash = H₁</text>
+    <!-- r2 -->
+    <rect x="230" y="86" width="150" height="86" rx="9" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="242" y="108" class="box">Record 2</text>
+    <text x="242" y="128" class="lbl">prev_hash = H₁</text>
+    <text x="242" y="150" class="mono">row_hash = H₂</text>
+    <!-- r3 -->
+    <rect x="430" y="86" width="150" height="86" rx="9" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="442" y="108" class="box">Record 3</text>
+    <text x="442" y="128" class="lbl">prev_hash = H₂</text>
+    <text x="442" y="150" class="mono">row_hash = H₃</text>
+    <!-- r4 -->
+    <rect x="630" y="86" width="150" height="86" rx="9" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="642" y="108" class="box">Record 4</text>
+    <text x="642" y="128" class="lbl">prev_hash = H₃</text>
+    <text x="642" y="150" class="mono">row_hash = H₄ (head)</text>
+  </g>
+
+  <!-- chain arrows -->
+  <path d="M180 129 L228 129" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#ac)"/>
+  <path d="M380 129 L428 129" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#ac)"/>
+  <path d="M580 129 L628 129" fill="none" stroke="#334155" stroke-width="1.6" marker-end="url(#ac)"/>
+
+  <!-- external anchor -->
+  <rect x="820" y="86" width="118" height="86" rx="9" fill="#ecfdf5" stroke="#059669"/>
+  <text x="879" y="120" text-anchor="middle" class="box" fill="#047857">External</text>
+  <text x="879" y="138" text-anchor="middle" class="box" fill="#047857">anchor</text>
+  <text x="879" y="156" text-anchor="middle" class="lbl">object-lock / log</text>
+  <path d="M780 120 L818 120" fill="none" stroke="#059669" stroke-width="1.6" marker-end="url(#ac)"/>
+
+  <!-- tamper on record 2 -->
+  <path d="M305 172 L305 210" fill="none" stroke="#dc2626" stroke-width="1.4"/>
+  <text x="305" y="228" text-anchor="middle" class="bad">edit Record 2 → H₂ changes</text>
+  <text x="305" y="246" text-anchor="middle" class="lbl">→ every prev_hash after it fails · verify-chain flags it</text>
+
+  <text x="640" y="228" class="lbl">Retention is crypto-erasure: payloads are cleared,</text>
+  <text x="640" y="246" class="lbl">the chain rows and hashes are never deleted.</text>
+</svg>
